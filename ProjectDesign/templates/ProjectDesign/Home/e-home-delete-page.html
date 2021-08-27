@@ -1,0 +1,31 @@
+{% extends 'ProjectDesign/extras/base.html' %}
+
+{% block content %}
+<section class="text-gray-600 body-font relative">
+    <div class="container px-5 py-10 mx-auto">
+
+        <!-- Heading -->
+        <div class="flex flex-col text-center w-full mb-12">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">
+                {{ object.get_class_name }} Delete Page
+            </h1>
+            <div class="flex pt-5 justify-center">
+                <div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
+            </div>
+        </div>
+
+        <!-- Delete -->
+        <div class="flex flex-col text-center w-full mb-12">
+            <form method="POST">
+                {% csrf_token %}
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Do you really want to delete "{{ object }}"?</p>
+
+                <div class="flex justify-center mt-5">
+                    <a href="{{ object.get_object_list_url }}" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Cancel</a>
+                    <button type="submit" class="ml-4 inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Yes, Sure</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock content %}

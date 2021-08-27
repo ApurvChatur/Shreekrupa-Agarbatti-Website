@@ -1,0 +1,45 @@
+{% extends 'ProjectDesign/extras/base.html' %}
+
+{% block content %}
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-10 mx-auto">
+
+        <!-- Heading -->
+        <div class="flex flex-col text-center w-full mb-10">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">
+                {{ objects_list.first.get_class_name }} List Page
+            </h1>
+            <div class="flex pt-5 justify-center">
+                <div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
+            </div>
+        </div>
+
+        <!-- List Items -->
+        <div class="flex flex-col justify-center mb-10 w-full">
+            <a href="{% url 'ProjectDesign:entry-page' %}" class="mx-auto text-white bg-indigo-500 border-0 py-2 px-5 mb-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Go Back</a>
+            <a href="{% url 'ProjectDesign:home-create-page' %}" class="mx-auto text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded text-lg">Create</a>
+        </div>
+
+        <div class="flex flex-wrap -m-4 justify-center">
+            {% for object in objects_list %}
+            <div class="p-4 md:w-1/3 text-center items-center">
+                <div class="h-full border-2 border-indigo-500 border-opacity-60 rounded-lg overflow-hidden">
+                    <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ object.image.url }}" alt="blog">
+                    <div class="p-6">
+                        <h1 class="title-font text-lg font-medium text-gray-900 mb-1">{{ object.title }}</h1>
+                        <h2 class="tracking-widest text-xs title-font font-medium text-gray-400 uppercase mb-3">{{ object.subtitle }}</h2>
+                        <div class="flex p-2 mt-2 w-full">
+                            <a href="{{ object.get_object_retrieve_url }}" class="mx-auto text-white bg-indigo-500 border-0 py-2 px-5 mx-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Retrieve</a>
+                            <a href="{{ object.get_object_update_url }}" class="mx-auto text-white bg-indigo-500 border-0 py-2 px-5 mx-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Update</a>
+                            <a href="{{ object.get_object_delete_url }}" class="mx-auto text-white bg-indigo-500 border-0 py-2 px-5 mx-2 focus:outline-none hover:bg-indigo-600 rounded text-lg">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</section>
+{% endblock content %}
+

@@ -1,0 +1,33 @@
+{% extends 'ProjectDesign/extras/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<section class="text-gray-600 body-font relative">
+    <div class="container px-5 py-10 mx-auto">
+
+        <!-- Heading -->
+        <div class="flex flex-col text-center w-full mb-12">
+            <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900">
+                {{ object_form.get_class_name | slice:":-4" }} Update Page
+            </h1>
+            <div class="flex pt-5 justify-center">
+                <div class="w-16 h-1 rounded-full bg-indigo-500 inline-flex"></div>
+            </div>
+        </div>
+
+        <!-- Update Form -->
+        <div class="lg:w-1/2 md:w-2/3 mx-auto">
+            <div class="flex flex-wrap -m-2 justify-center text-center">
+                <form class="flex flex-col items-center p-2 w-1/2" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ object_form.media }}
+                    {{ object_form | crispy }}
+                    <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-8 mt-5 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                        type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock content %}
