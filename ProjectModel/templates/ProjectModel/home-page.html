@@ -1,0 +1,103 @@
+{% extends 'ProjectModel/extras/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<section class="text-gray-400 bg-gray-900 body-font">
+  <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+    <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6 md:mb-0 mb-10 flex justify-center">
+      <img class="object-cover object-center rounded" alt="hero" src="{{ home.image.url }}">
+    </div>
+    <div class="lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 flex flex-col md:items-start md:text-left items-center text-center">
+      <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-white">
+        Welcome to {{ home.title }}
+      </h1>
+      <div class="mb-8 leading-relaxed">
+          Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed
+          tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken
+          authentic tumeric truffaut hexagon try-hard chambray.
+      </div>
+      <div class="mb-8 leading-relaxed">
+          Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed
+          tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken
+          authentic tumeric truffaut hexagon try-hard chambray.
+      </div>
+      <div class="flex justify-center">
+        <a href="#categories" class="inline-flex text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Button</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="categories" class="text-gray-400 bg-gray-900 body-font">
+  <div class="container px-5 py-24 mx-auto">
+     <div class="text-center mb-20">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font text-white mb-4">Categories</h1>
+      <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-400 text-opacity-80">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi pug.</p>
+      <div class="flex mt-6 justify-center">
+        <div class="w-16 h-1 rounded-full bg-red-500 inline-flex"></div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap -m-4">
+      {% for category in categories %}
+      <div class="p-4 md:w-1/3">
+        <div class="flex rounded-lg h-full bg-gray-800 bg-opacity-60 p-8 flex-col">
+          <div class="flex items-center mb-3">
+            <div class="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-red-500 text-white flex-shrink-0">
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                <circle cx="6" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <path d="M20 4L8.12 15.88M14.47 14.48L20 20M8.12 8.12L12 12"></path>
+              </svg>
+            </div>
+            <h2 class="text-white text-lg title-font font-medium">{{ category.title }}</h2>
+          </div>
+          <div class="flex-grow">
+            <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
+            <a href="{{ category.get_category_url }}" class="mt-3 text-red-400 inline-flex items-center">Learn More
+              <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<section class="text-gray-400 bg-gray-900 body-font">
+  <div class="container px-5 py-24 mx-auto">
+
+   <div class="text-center mb-20">
+      <h1 class="sm:text-3xl text-2xl font-medium title-font text-white mb-4">Featured Products</h1>
+      <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto text-gray-400 text-opacity-80">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi pug.</p>
+      <div class="flex mt-6 justify-center">
+        <div class="w-16 h-1 rounded-full bg-red-500 inline-flex"></div>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap -m-4">
+      {% for product in featured_products %}
+      <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+        <a href="{{ product.get_product_url }}" class="block relative h-48 rounded overflow-hidden">
+          <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="https://dummyimage.com/423x263">
+        </a>
+        <div class="mt-4">
+          <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{ product.category.title | upper }}</h3>
+          <h2 class="text-white title-font text-lg font-medium">{{ product.title }}</h2>
+          <p class="mt-1">$18.40</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+          <button class="flex mx-auto mt-16 text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg">
+              <a href="{% url 'ProjectModel:products-page' %}">View all Products</a></button>
+  </div>
+</section>
+
+{% endblock content %}
+

@@ -9,7 +9,7 @@
       <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-white">All Products</h1>
       <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical.</p>
       <div class="flex mx-auto border-2 border-red-500 rounded overflow-hidden mt-6">
-        <button class="py-1 px-4 bg-red-500 text-white focus:outline-none">All</button>
+        <a href="{% url 'ProjectModel:products-page' %}" class="py-1 px-4 text-white focus:outline-none">All</a>
           {% for category in categories %}
             <a href="{{ category.get_category_url }}" class="py-1 px-4 text-gray-300 focus:outline-none">{{ category.title }}</a>
           {% endfor %}
@@ -17,9 +17,9 @@
     </div>
 
       <div class="flex flex-wrap -m-4">
-        {% for product in products %}
+        {% for product in category.product_set.all %}
           <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
-            <a href="{{ product.get_product_url }}" class="block relative h-48 rounded overflow-hidden">
+            <a href="{{ product.get_product_page_url }}" class="block relative h-48 rounded overflow-hidden">
               <img alt="ecommerce" class="object-cover object-center w-full h-full block" src="https://dummyimage.com/420x260">
             </a>
             <div class="mt-4">

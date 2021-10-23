@@ -58,6 +58,30 @@ class Home(models.Model):
                        })
 
 
+class Category(models.Model):
+    title = models.CharField(max_length=20, unique=True, default='Agarbatti')
+    subtitle = models.CharField(max_length=50, default='Check our agarbattis')
+    slug = models.SlugField(unique=True, blank=True)
+
+    # Some Common Methods
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.slug
+
+    def get_class_name(self):
+        return self.__class__.__name__
+
+    # Project Model
+    def get_category_url(self):
+        return reverse('ProjectModel:category-page',
+                       kwargs={
+                           'slug': self.slug
+                       })
+
+
 class Product(models.Model):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=255)
@@ -65,8 +89,11 @@ class Product(models.Model):
     discount_price = models.DecimalField(decimal_places=2, max_digits=5, blank=True, null=True)
     description = fields.RichTextField()
     #
-    tag = models.CharField(max_length=50, choices=TAG_CHOICES)
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, blank=True, null=True)
+    tag = models.CharField(choices=(
+                                ('featured', 'featured'),
+                                ('recent', 'recent'),
+                            ), max_length=20, default='featured')
     #
     related_home = models.ForeignKey(Home, on_delete=models.CASCADE, default=f'shreekrupa-agarbatti')
     slug = models.SlugField(unique=True, blank=True)
